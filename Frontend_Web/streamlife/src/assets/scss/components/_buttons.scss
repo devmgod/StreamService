@@ -1,0 +1,241 @@
+/*Button*/
+.btn {
+}
+button:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+.btn.focus,
+.btn:focus {
+  box-shadow: none;
+}
+
+.mat-button-base {
+  &.mat-button {
+    &.mat-primary.btn-mylive {
+      color: $myliveThemeColor;
+    }
+  }
+}
+
+
+.mat-button-base {
+  &.mat-stroked-button.btn-mylive {
+    border-color: $myliveThemeColor;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 35px;
+    &.mat-primary {
+      color: $myliveThemeColor;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-raised-button.btn-mylive {
+    border-radius: 0px;
+    box-shadow: none;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    @media screen and (max-width: 768px) {
+      font-size: 13px;
+    }
+    &.mat-primary {
+      background-color: $myliveThemeColor;
+    }
+  }
+}
+// #####################
+
+.mat-button-base {
+  &.mat-button {
+    &.mat-primary.btn-minhavida {
+      color: $minhavidaThemeColor;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-stroked-button.btn-minhavida {
+    border-color: $minhavidaThemeColor;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 35px;
+    &.mat-primary {
+      color: $minhavidaThemeColor;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-raised-button.btn-minhavida {
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: 500;
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+    &.mat-primary {
+      background-color: $minhavidaThemeColor;
+    }
+  }
+}
+// #####################
+
+.mat-button-base {
+  &.mat-button {
+    &.mat-primary.btn-zindagi {
+      color: $zindagiThemeColor;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-stroked-button.btn-zindagi {
+    border-color: $zindagiThemeColor;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 35px;
+    &.mat-primary {
+      color: $zindagiThemeColor;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-raised-button.btn-zindagi {
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: 500;
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+    &.mat-primary {
+      background-color: $zindagiThemeColor;
+    }
+  }
+}
+// ######################
+
+.mat-button-base {
+  &.mat-button {
+    &.mat-primary.btn-mivida {
+      color: $mividaThemeColor;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-stroked-button.btn-mivida {
+    border-color: $mividaThemeColor;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 35px;
+    &.mat-primary {
+      color: $mividaThemeColor;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-raised-button.btn-mivida {
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: 500;
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+    &.mat-primary {
+      background-color: $mividaThemeColor;
+    }
+  }
+}
+
+// ########################
+
+.mat-button-base {
+  &.mat-button {
+    &.mat-primary.btn-my-life {
+      color: $mylifeThemeColor;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-stroked-button.btn-my-life {
+    border-color: $mylifeThemeColor;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 35px;
+    &.mat-primary {
+      color: $mylifeThemeColor;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+.mat-button-base {
+  &.mat-raised-button.btn-my-life {
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 16px;
+    font-weight: 500;
+    vertical-align: middle;
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+    }
+    &.mat-primary {
+      background-color: $mylifeThemeColor;
+    }
+  }
+}
+
+.nav-btns {
+  .btn {
+    min-width: 85px;
+    height: 30px;
+    line-height: 12px;
+    @media screen and (max-width: 768px) {
+      min-width: 85px;
+      padding: 0 12px;
+    }
+
+  }
+}
+
+.mat-button-base.mat-raised-button.btn-mylive.mat-primary.signup-btn{
+  margin-right:10px;    
+  background-color: #009b3a;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+.mat-flat-button {
+  &.btn-golive {
+    background-color: #00ce4d;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 12px;
+    height: 30px;
+    border-radius: 0px !important;
+    color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+  }
+}

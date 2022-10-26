@@ -1,0 +1,208 @@
+<page-header (reloadPageEvent)="reloadPage($event)"></page-header>
+<div class="page-wrapper">
+  <perfect-scrollbar [config]="{suppressScrollX:true}">
+    <div class="container-fluid px-0">
+      <div class="app-row">
+        <div class="app-col col-2">
+          <page-left-sidebar></page-left-sidebar>
+        </div>
+        <div class="app-col col-7">
+          <div id="streamingArea" class="streaming-area-wrap">
+            <div style="height: 100%">
+              <button
+                id="leftScroll" 
+                mat-icon-button 
+                class="vertical-center buttonClass leftCaratTransform ml-2"
+                (click)="scrollLeft()"
+                (mouseenter)="mouseEnterScroll()"
+              >
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 16a1 1 0 0 1-.707-.293L5.636 10.05A1 1 0 0 1 7.05 8.636l4.95 4.95 4.95-4.95a1 1 0 0 1 1.414 1.414l-5.657 5.657A1 1 0 0 1 12 16z"
+                  />
+                </svg>
+              </button>
+              <video #stream_screen class="streaming-vid" [src]="videoSrc" autoplay loop (mouseenter)="mouseEnter()" (mousemove)="mouseEnter()" (mouseleave)="mouseLeave()" (wheel)="mouseWheelScroll()">
+              </video>
+              <button
+                id="rightScroll"
+                mat-icon-button
+                class="vertical-center buttonClass rightPinned rightCaratTransform"
+                style="margin-right: 20px;"
+                (click)="scrollRight()"
+                (mouseenter)="mouseEnterScroll()"
+              >
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 16a1 1 0 0 1-.707-.293L5.636 10.05A1 1 0 0 1 7.05 8.636l4.95 4.95 4.95-4.95a1 1 0 0 1 1.414 1.414l-5.657 5.657A1 1 0 0 1 12 16z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="streamer-input-area">
+              <div class="authers-wrap">
+                <div class="lefthandmenu">                  
+                    <img class="user-img {{no_img_class}}" [src]="streamerProfilePic" alt="" draggable="false" />                  
+                    <h5 class="statsUsername">{{this.streamerUsername}}</h5>
+                    <p> {{this.viewerCount}} viewers </p>
+                </div>  
+                <p class="playtime">
+                  {{playTime == undefined ? '00:00:00':playTime}}
+                </p>              
+              </div>
+              <div class="follow-area">
+                <button
+                  class="btn btn-mylive follow-btn"
+                  (click)="clickToFollow()"
+                  [disabled]="_isDisabled"
+                  id= "follow-btn"
+                >
+                  <span>               
+                      <img style="width: 20px; height: 20px;" src="{{followIconImg}}" alt="following" draggable="false" />
+                      <span class="follow-text">{{isFollowText}}</span>
+                  </span>
+                </button>
+                <button 
+                  title="Tip"
+                  style="background-color: #FFFFFF; border: none; cursor: pointer;" 
+                  class="btn btn-mylive mr-1"
+                  (click)="OpenShopDialog('tips')">
+                  <img style="width: 20px;" src="../../../assets/images/tips.1.svg" alt="" draggable="false" />
+                  <span style="font-weight: bold; margin-left: 3px;">Tip</span>
+                </button>
+              </div>           
+          </div>
+          <div class="media">
+            <div class="media-body">
+              <div class="sub-row">
+                <div class="sub-col">
+                  <form autocomplete="off" [formGroup]="streamerInfoForm" id="streamerInfoForm" class="streamer_info-form w-100">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <div>
+                      <textarea matInput class="w-100 infoTextForm" formControlName="info_text"
+                      [readonly]="isReadonlyInfo" #info_text value="{{infoText}}"></textarea>
+                      </div>
+                    <div style="position: relative;">
+                      <button mat-icon-button class="edit-info-btn" *ngIf="isSaveBtnHide" color="primary" (click)="saveInfoText()" >
+                        Save
+                      </button>
+                      <button mat-icon-button class="edit-info-btn" *ngIf="isEditBtnHide" color="primary" (click)="openInfoBox(info_text.value)">
+                        Edit
+                      </button>
+                    </div>
+                      <mat-error *ngIf="streamerInfoForm.controls['info_text'].invalid && (streamerInfoForm.controls['info_text'].dirty || streamerInfoForm.controls['info_text'].touched)">
+                        <div>Maximum of 256 characters </div>
+                      </mat-error>
+                    </mat-form-field>                    
+                  </form>
+                </div>
+              </div>
+            </div>   
+          </div> 
+        </div>
+        <div class="app-col col-3">
+          <div class="tab-wrap">
+            <div class="tab-wrap stream_chat_box" #stream_chat_box>
+              <h3 id="streamHeaderText" class="streamHeader">Stream Chat</h3>
+                <div id="streamHeaderDivider" class="divDivider"></div>
+                  <div class="msger-scroll">
+                    <perfect-scrollbar #chat_scrollbar>
+                      <main #msg_body class="msger-chat msg_body">
+                        <div class="sender" #sender *ngFor="let messageData of messages; index as i" >
+                          <div class="sender-body {{messageData.is_read}}">
+                            <img draggable="false" class="user-circle-img headerIcons {{no_img_class}}" onError="this.src='assets/images/no-avatar.png'" [src]=" messageData.profile_pic_url" alt="" />&nbsp;&nbsp;&nbsp; 
+                            <strong class="messenger-name"
+                              >{{ messageData.name | titlecase }}
+                              </strong
+                            >&nbsp;
+                            <p class="message">{{ messageData.messages }}</p>
+                          </div>
+                        </div>
+                      </main>
+                    </perfect-scrollbar>
+                    <div class="msger-inputarea">
+                      <form
+                        autocomplete="off"
+                        [formGroup]="formChat"
+                        id="formChat"
+                        (ngSubmit)="sendMessage(roomID, chatMessage.value)"
+                      >
+                        <input
+                          type="text"
+                          class="msger-input"
+                          id="chat-message"
+                          #chatMessage
+                          formControlName="chatMessage"
+                          placeholder="Enter your message..."
+                          maxlength="200"
+                        />
+                        <mat-icon class="emoji-btn" matSuffix [matMenuTriggerFor]="emojiIcon"><svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0)">
+                            <path
+                              d="M20.4853 3.51469C18.2188 1.24823 15.2053 0 12 0C8.79469 0 5.78123 1.24823 3.51469 3.51469C1.24823 5.78123 0 8.79469 0 12C0 15.2053 1.24823 18.2188 3.51469 20.4853C5.78123 22.7518 8.79469 24 12 24C15.2053 24 18.2188 22.7518 20.4853 20.4853C22.7518 18.2188 24 15.2053 24 12C24 8.79469 22.7518 5.78123 20.4853 3.51469ZM16.2363 7.06055C17.792 7.06055 19.0576 8.32617 19.0576 9.88186H17.6514C17.6514 9.10158 17.0166 8.4668 16.2363 8.4668C15.456 8.4668 14.8213 9.10158 14.8213 9.88186H13.415C13.4151 8.32617 14.6807 7.06055 16.2363 7.06055ZM7.76367 7.06055C9.31936 7.06055 10.585 8.32617 10.585 9.88186H9.17873C9.17873 9.10158 8.54395 8.4668 7.76367 8.4668C6.98339 8.4668 6.34861 9.10158 6.34861 9.88186H4.94236C4.94241 8.32617 6.20803 7.06055 7.76367 7.06055ZM12 19.7637C8.91272 19.7637 6.11897 17.9354 4.88269 15.1058L6.17128 14.5427C7.18378 16.86 9.47166 18.3574 12 18.3574C14.5283 18.3574 16.8162 16.86 17.8287 14.5428L19.1173 15.1058C17.881 17.9354 15.0873 19.7637 12 19.7637Z"
+                              fill="#D7D7D7"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0">
+                              <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg></mat-icon>
+                        <mat-menu #emojiIcon="matMenu" class="emoji-menu">
+                          <emoji-mart (emojiClick)="addEmoji($event)" (click)="emojiPreventClose($event);" [darkMode]="false" [showPreview]="false" [style]="{width: '250px'}" color="#0165c2"></emoji-mart>
+                        </mat-menu>
+                        <button
+                          mat-button
+                          type="submit"
+                          class="msger-send-btn"
+                          id="sendBtn"
+                        >
+                          <svg
+                            width="20px"
+                            height="24px"
+                            viewBox="0 0 20 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0)">
+                              <path
+                                d="M19.586 11.2209L1.01504 0.935435C0.719337 0.774296 0.366489 0.870294 0.16078 1.17543C-0.0463578 1.48056 -0.0535004 1.91427 0.143637 2.22798L6.25062 11.9992L0.143637 21.7704C-0.0535004 22.0841 -0.0463578 22.5195 0.159351 22.8229C0.297919 23.0303 0.505057 23.1418 0.715051 23.1418C0.816477 23.1418 0.917903 23.116 1.01361 23.0629L19.5846 12.7774C19.8388 12.6369 20.0003 12.3334 20.0003 11.9992C20.0003 11.6649 19.8388 11.3615 19.586 11.2209Z"
+                                fill="#0165C2"
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id="clip0">
+                                <rect width="20" height="24" fill="white" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </button>
+                      </form>
+                      <div class="chat-message-length">{{chatMessage.value.length}}/200</div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</div>

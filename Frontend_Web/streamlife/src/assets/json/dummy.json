@@ -1,0 +1,24 @@
+{
+  "streamers": [
+    {
+      "user_id": "5564b759-ea96-4ebd-937b-1f7fbdef2cc6", 
+      "username":"rgrewal",
+      "videoSrc":""
+    },
+    {
+      "user_id": "e49eecb1-1d10-4217-86fd-261bb35c52db", 
+      "username":"ParambirGrewal",
+      "videoSrc":""
+    },
+    {
+      "user_id": "9f1badeb-75c2-49c9-97de-107eda892712", 
+      "username":"UserFour",
+      "videoSrc":""
+    },
+    {
+      "user_id": "d79fbe1a-6b52-4896-aced-c72dfa65a2aa",
+      "username":"rgrewaltest123",
+      "videoSrc":""
+    }
+  ]
+}

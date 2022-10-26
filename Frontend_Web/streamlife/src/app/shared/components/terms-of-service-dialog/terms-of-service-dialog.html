@@ -1,0 +1,51 @@
+<div class="dialog-inner">
+  <div class="dialog-heder">
+    <button class="btn-hide-absolute"></button>
+    <button mat-icon-button mat-dialog-close class="dialog-close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 10 10" >
+        <path
+          fill="#414244"
+          d="M.262 9.737c.175.175.401.263.635.263.233 0 .459-.088.634-.263L5 6.263l3.47 3.474c.174.175.4.263.633.263.234 0 .46-.088.635-.263.35-.35.35-.912 0-1.263L6.254 5l3.469-3.474c.35-.35.35-.913 0-1.263-.35-.35-.911-.35-1.26 0l-3.47 3.474L1.523.263c-.35-.35-.91-.35-1.26 0s-.35.912 0 1.263L3.731 5 .262 8.474c-.35.35-.35.913 0 1.263z"
+          opacity=".5"
+        />
+      </svg>
+    </button>
+    <h3 style="margin-top: 0px !important; margin-bottom: 0px !important; font-size: 16px;">Terms of Service</h3>
+  </div>
+  <form autocomplete="off" name="termsOfServiceForm" [formGroup]="termsOfServiceForm" (ngSubmit)="onSubmit()"  novalidate>
+    <div class="dialog-content">
+      <p>Payment processing services for streamers on Stream Life are provided by Stripe and are subject to the Stripe Connected Account Agreement, which includes the Stripe Terms of Service (collectively, the “Stripe Services Agreement”). By agreeing to these terms or continuing to operate as a streamer on Stream Life, you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of Stream Life enabling payment processing services through Stripe, you agree to provide Stream Life accurate and complete information about you and your business, and you authorize Stream Life to share it and transaction information related to your use of the payment processing services provided by Stripe.</p>
+      <p>Stream Life uses Stripe to make payouts to streamers. The Stripe Recipient Agreement applies to your receipt of such Payouts. To receive payouts from Stream Life, you must provide Stream Life accurate and complete information about you and your business, and you authorize Stream Life to share it and transaction information related to your payout with Stripe.</p>
+      <div class="row">
+        <div class="form-group col-lg-7 col-md-7">
+          <input formControlName="agree" type="checkbox"><span style="font-size: 14px; font-weight: bold;">I accept and agree to the Terms of Service</span>
+          <mat-error *ngIf="submitted && t.agree.errors">
+            <div *ngIf="t.agree.errors.required">You must agree to the Terms of Service</div>
+          </mat-error>
+        </div>
+        <div class="form-group col-lg-5 col-md-5" style="margin-bottom: 10px">
+          <input
+            class="inputStyle secureText"
+            formControlName="ssn"
+            placeholder="Social Security Number"
+            required
+            autocomplete="on"
+            maxlength="9"
+            type="password"
+          />
+          <mat-error *ngIf="submitted && t.ssn.errors">
+            <div *ngIf="t.ssn.errors.required">SSN is required</div>
+            <div *ngIf="t.ssn.errors.pattern">SSN Format is not valid</div>
+          </mat-error>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <div class="pay-options justify-content-center">
+        <button class="pay-outline-btn lg-btn" mat-stroked-button onClick >
+          Proceed
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

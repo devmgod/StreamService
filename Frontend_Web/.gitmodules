@@ -1,0 +1,21 @@
+[submodule "Documentation"]
+	path = Documentation
+	url = git@gitlab.streamlife.is:streamlife/Documentation.git
+[submodule "Frontend_Android"]
+	path = Frontend_Android
+	url = git@gitlab.streamlife.is:streamlife/Frontend_Android.git
+[submodule "NodeServer"]
+	path = NodeServer
+	url = git@gitlab.streamlife.is:streamlife/NodeServer.git
+[submodule "Frontend_iOS"]
+	path = Frontend_iOS
+	url = git@gitlab.streamlife.is:streamlife/Frontend_iOS.git
+[submodule "infrastructure"]
+	path = infrastructure
+	url = git@gitlab.streamlife.is:streamlife/infrastructure.git
+[submodule "Backend"]
+	path = Backend
+	url = git@gitlab.streamlife.is:streamlife/Backend.git
+[submodule "StreamLife_Web"]
+	path = StreamLife_Web
+	url = git@gitlab.streamlife.is:streamlife/StreamLife_Web.git

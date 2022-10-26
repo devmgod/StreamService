@@ -1,0 +1,256 @@
+@mixin font-size($fs-map, $fs-breakpoints: $breakpoints) {  
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    //@debug $fs-breakpoint;
+    @if $fs-breakpoint == null {
+      @include make-font-size($fs-font-size);
+    }
+    @else {
+      // If $fs-font-size is a key that exists in
+      // $fs-breakpoints, use the value
+      @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+        $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+      }
+      @media screen and (min-width: $fs-breakpoint) {
+        @include make-font-size($fs-font-size);
+      }
+    }
+  }
+}
+
+
+@mixin make-font-size($fs-font-size) {
+  // If $fs-font-size is a list, include
+  // both font-size and line-height
+  @if type-of($fs-font-size) == "list" {
+    font-size: nth($fs-font-size, 1);
+    @if (length($fs-font-size) > 1) {
+      line-height: nth($fs-font-size, 2);
+    }
+  }
+  @else {
+    font-size: $fs-font-size;
+  }
+}
+
+/********** auszug slider **************/
+
+@mixin auszugslider($fs-map, $fs-breakpoints: $breakpoints) {  
+  @each $fs-breakpoint, $fs-dimensions in $fs-map {
+    //@debug $fs-breakpoint;
+    @if $fs-breakpoint == null {
+      @include make-slider-size($fs-dimensions);
+    }
+    @else {
+      // If $fs-font-size is a key that exists in
+      // $fs-breakpoints, use the value
+      @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+        $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+      }
+      @media screen and (min-width: $fs-breakpoint) {
+        @include make-slider-size($fs-dimensions);
+      }
+    }
+  }
+}
+
+
+@mixin make-slider-size($fs-font-size) {
+  @if type-of($fs-font-size) == "list" {
+    width: nth($fs-font-size, 1);
+    height: nth($fs-font-size, 2);
+    @if (length($fs-font-size) > 4) {
+      right: nth($fs-font-size, 3);
+    }
+    @else {
+      left: nth($fs-font-size, 3);
+    }
+    bottom: nth($fs-font-size, 4);
+  }
+  @else {
+    width: $fs-font-size;
+  }
+}
+
+/********* utility headings ************/
+@mixin headings($from: 1, $to: 6, $class: 'h') {
+  $selector: ();
+  @for $i from $from through $to {
+    $selector: append($selector, "#{$class}#{$i}", comma);
+  }
+
+  #{$selector} {
+    @content;
+  }
+}
+
+/************* Gradient Mixin *****************/
+
+@mixin gradientMixin($frmColor,$toColor) {
+    background: $frmColor;
+    background: -moz-linear-gradient(left, $frmColor 0%, $toColor 100%);
+    background: -webkit-linear-gradient(left, $frmColor 0%,$toColor 100%);
+    background: linear-gradient(to right, $frmColor 0%,$toColor 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$frmColor, endColorstr=$toColor,GradientType=1 );
+}
+
+/************ circle button dimensions ***************/
+
+@mixin circle-btn-dimensions($fs-map, $fs-breakpoints: $breakpoints) {  
+  @each $fs-breakpoint, $fs-dimensions in $fs-map {
+    @if $fs-breakpoint == null {
+      @include width-height-dimensions($fs-dimensions);
+    }
+    @else {
+      @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+        $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+      }
+      @media screen and (min-width: $fs-breakpoint) {
+        @include width-height-dimensions($fs-dimensions);
+      }
+    }
+  }
+}
+
+@mixin width-height-dimensions($fs-dimensions) {
+  @if type-of($fs-dimensions) == "list" {
+    @if (length($fs-dimensions) > 1) {
+      width: nth($fs-dimensions, 1);
+      height: nth($fs-dimensions, 2);
+    }
+  }  
+}
+
+/***************** font-weight ***********************/
+
+@mixin font-weight($weight) {
+  $weights: (
+    thin: 100,
+    extra-light: 200,
+    ultra-light: 200,
+    light: 300,
+    normal: 400,
+    book: 400,
+    regular: 400,
+    medium: 500,
+    semi-bold: 600,
+    demi-bold: 600,
+    bold: 700,
+    extra-bold: 800,
+    ultra-bold: 900,
+    heavy: 900,
+    black: 900,
+    ultra: 900,
+    ultra-black: 900,
+    extra-ultra: 900
+  );
+  
+  $output: $weight;
+  @if map-has-key($weights, $weight) {
+    $output: map-get($weights, $weight);
+  }
+  
+  font-weight: $output;
+}
+
+/************ common property mixins ***************/
+
+
+@mixin marginOrPaddingAllSides($prefixVal,$values...) { 
+  @each $x in $values {
+    $keyName: nth($x, 1);
+    $valueOfSide: nth($x, 2);
+    @if (map-has-key($sides, $keyName) and (map-has-key($toCheckCssProperty, $prefixVal))) {
+      #{$prefixVal}-#{$keyName}: $valueOfSide;
+    }
+    @else if ($keyName=='all') {      
+        #{$prefixVal}: $valueOfSide;
+    }
+  }  
+}
+
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+        $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+        @content;
+    }
+  }
+}
+
+/************* extends rules ****************/
+%background-cover{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/*************** unsere-section *******************/
+%condition-li-css {
+  content: '';
+  width: 2px;
+  background: #E7508F;
+  position: absolute;
+  left: 16px;
+  top: 34px;
+  bottom: 0;
+}
+@mixin unsere-section-ul-li($elmCount) {  
+  @if $elmCount % 2 == 0 {
+    &:not(:last-child):not(:nth-last-child(2)):before {
+      content: '';
+      width: 2px;
+      background: #E7508F;
+      position: absolute;
+      left: 16px;
+      top: 34px;
+      bottom: 0;
+    }
+    &:last-child,&:nth-last-child(2) {
+      padding-bottom: 0;
+    }
+  }
+  @else {
+    &:not(:last-child):before {
+      content: '';
+      width: 2px;
+      background: #E7508F;
+      position: absolute;
+      left: 16px;
+      top: 34px;
+      bottom: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }  
+}
+
+/**/
+@mixin after-effect() {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  content: "";
+}
+
+@mixin flashing-hover {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	background: rgba(255,255,255,.2);
+	border-radius: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+  }
+  @mixin flashing-hover-hover{-webkit-animation: circle .75s;
+	animation: circle .75s;}  

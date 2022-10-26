@@ -1,0 +1,57 @@
+<div class="dialog-inner">
+  <div class="dialog-heder">
+    <button class="btn-hide-absolute"></button>
+    <button mat-icon-button mat-dialog-close class="dialog-close">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 10 10"
+      >
+        <path
+          fill="#414244"
+          d="M.262 9.737c.175.175.401.263.635.263.233 0 .459-.088.634-.263L5 6.263l3.47 3.474c.174.175.4.263.633.263.234 0 .46-.088.635-.263.35-.35.35-.912 0-1.263L6.254 5l3.469-3.474c.35-.35.35-.913 0-1.263-.35-.35-.911-.35-1.26 0l-3.47 3.474L1.523.263c-.35-.35-.91-.35-1.26 0s-.35.912 0 1.263L3.731 5 .262 8.474c-.35.35-.35.913 0 1.263z"
+          opacity=".5"
+        />
+      </svg>
+    </button>
+    <h3 style="margin-top: 0px !important; margin-bottom: 0px !important; font-size: 16px;">Stream options</h3>
+  </div>
+  <form autocomplete="off" name="webRTCOptionsForm" [formGroup]="webRTCOptionsForm" (ngSubmit)="onSubmit()" id="webRTCOptionsForm" novalidate>
+    <div class="dialog-content">
+      <div class="container">
+        <div class="container-box">
+          <div class="shop-content ">
+            <input type="radio" id="webcam" formControlName="streamOptions" value="Webcam">
+            <label for="webcam">Webcam</label>
+            <input type="radio" id="screenShare" formControlName="streamOptions" value="ScreenShare">
+            <label for="screenShare">Screen Share</label>
+            <input type="radio" id="webcamScreenShare" formControlName="streamOptions" value="WebcamScreenShare">
+            <label for="webcamScreenShare">Webcam Screen Share</label>
+            <mat-error *ngIf="submitted && f.streamOptions.errors">
+              <div *ngIf="f.streamOptions.errors.required">You must select a stream option</div>
+            </mat-error>
+            <mat-error *ngIf="submitted">
+              <div *ngIf="catchError">Browser - {{errorMessage}}</div>
+            </mat-error>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <div class="pay-options">
+         <button
+          mat-button
+          class="card-info"
+        >
+        </button> 
+        <button
+          class="pay-outline-btn"
+          mat-stroked-button
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

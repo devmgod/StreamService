@@ -1,0 +1,104 @@
+* {
+  outline: none !important;
+}
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none !important;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+body {
+  font-family: $sitefont;
+  color: $allTextColor;
+  @include font-size($body-font-sizes);
+  @include font-weight(400);
+  margin: 0px;
+  padding: 0px;
+}
+
+figure {
+  margin-bottom: 0;
+}
+img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+  vertical-align: middle;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ol {
+  list-style: decimal inside;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+}
+p {
+  margin: 0 0 10px;
+  padding: 0;
+}
+.btn {
+  white-space: normal;
+}
+.btn.focus,
+.btn:focus {
+  box-shadow: none;
+}
+a,
+a:hover,
+a:visited {
+  text-decoration: none !important;
+  /*word-break:break-all;*/
+}
+
+::selection {
+  background-color: $myliveThemeColor;
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: $myliveThemeColor;
+  color: #fff;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  color: #d7d7d7;
+  font-family: $sitefont;
+  font-weight: 400;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #d7d7d7;
+  font-family: $sitefont;
+  font-weight: 400;
+}
+
+::placeholder {
+  color: #d7d7d7;
+  font-family: $sitefont;
+  font-weight: 400;
+}

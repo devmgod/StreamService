@@ -1,0 +1,174 @@
+<!-- //<div class="leftbar-menu-wrapper" (click)="clickLeftSidebar()" (mouseenter)="enterLeftSideBar($event)" (mouseleave)="leaveLeftSideBar($event)"> -->
+<div class="leftbar-menu-wrapper" (click)="clickLeftSidebar()">  
+  <div class="leftbar-menu" (click)="onEvent($event)">
+    <perfect-scrollbar>
+      <div class="leftbar-nav-content follow-section">       
+        <ul class="leftbar-ul">
+            <li class="nav-main-section">
+              <div class="nav-main-inner">
+                <h3 class="nav-main-header">
+                  <img style="width: 20px; height: 20px;" src="../../../../assets/images/Followers.svg" alt="followers" draggable="false" />
+                  <span class="follow-label">Followers</span>
+                  <span class="show-count" [hidden]="isShowCount" title="Total followers">{{totalFollowers}}</span>
+                </h3>                
+                <ul class="nav-main-links" *ngIf="isLoggedIn">
+                  <li class="nav-main-link" *ngFor="let followerData of followers; index as i">
+                    <div class="nav-main-link-a">          
+                      <div class="link-flex">
+                        <div class="media">  
+                          <a href="#" class="follow-link">
+                            <span class="live-user-img {{ followerData.isFollowerlive === true ?'live-active' : ' ' }}">
+                              <img src="{{followerData.imgUrl}}" onError="this.src='assets/images/no-avatar.png'" draggable="false" alt="" />
+                              <span class="user-live {{ followerData.isFollowerlive === true ?'' : 'd-none' }}">LIVE</span>
+                            </span>
+                            <div class="media-body close">
+                              <span class="nav-link-text">{{ followerData.username | titlecase }}</span>
+                            </div>
+                          </a>
+                          <button 
+                            mat-icon-button
+                            (click)="deleteFollower($event, followerData.follower_id)"
+                          >
+                          <mat-icon inline=true style="margin-bottom: 3px;">
+                          <svg height="10" width="10" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                          viewBox="0 0 115.76 111.41" style="enable-background:new 0 0 115.76 111.41;" xml:space="preserve">
+                          <style type="text/css">
+                          .st0{fill:#FF0000;}
+                          </style>
+                          <polygon class="st0" points="71.39,54.46 110.08,4.91 82.93,4.91 57.84,37.62 32.87,4.91 5.74,4.91 44.41,54.57 3.71,106.5 
+                          30.75,106.5 57.84,71.35 85.05,106.5 112.05,106.5 "/>
+                          </svg>
+                          </mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <button mat-icon-button class="more-dot" *ngIf="followers?.length > 1">
+                    <mat-icon>
+                      <svg
+                        version="1.1"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="24px"
+                        height="24px"
+                        viewBox="0 0 990.9 990.9"
+                        style="enable-background: new 0 0 990.9 990.9"
+                        xml:space="preserve"
+                      >
+                        <g>
+                          <path
+                            d="M144.2,639.6c79.6,0,144.1-64.5,144.1-144.1c0-79.601-64.5-144.1-144.1-144.1C64.5,351.3,0,415.8,0,495.4
+      C0,575,64.5,639.6,144.2,639.6z M144.2,425.9c38.3,0,69.5,31.2,69.5,69.5c0,38.301-31.2,69.5-69.5,69.5
+      c-38.3,0-69.5-31.199-69.5-69.5C74.7,457.1,105.8,425.9,144.2,425.9z"
+                          />
+                          <path
+                            d="M351.4,495.4C351.4,575,415.9,639.5,495.5,639.5S639.6,575,639.6,495.4c0-79.6-64.5-144.1-144.1-144.1
+      S351.4,415.8,351.4,495.4z M565,495.4c0,38.301-31.2,69.5-69.5,69.5S426,533.701,426,495.4c0-38.3,31.2-69.5,69.5-69.5
+      S565,457.1,565,495.4z"
+                          />
+                          <path
+                            d="M846.8,351.3c-79.6,0-144.1,64.5-144.1,144.1C702.7,575,767.2,639.5,846.8,639.5C926.4,639.5,990.9,575,990.9,495.4
+      C991,415.8,926.5,351.3,846.8,351.3z M846.8,564.9c-38.3,0-69.5-31.199-69.5-69.5c0-38.3,31.2-69.5,69.5-69.5s69.5,31.2,69.5,69.5
+      C916.3,533.701,885.2,564.9,846.8,564.9z"
+                          />
+                        </g>
+                      </svg>
+                    </mat-icon>
+                  </button>
+                </ul>
+                <ul *ngIf="!isLoggedIn">
+                  <li class="not-login-text">Log in to see Followers</li>
+                </ul>
+              </div>
+            </li>            
+        </ul>
+
+        <ul class="leftbar-ul">
+            <li class="nav-main-section">
+              <div class="nav-main-inner">
+                <h3 class="nav-main-header"> 
+                  <img style="width: 20px; height: 20px;" src="../../../../assets/images/Following.svg" alt="following" draggable="false" />
+                  <span class="follow-label">Following</span>
+                  <span class="show-count" [hidden]="isShowCount" title="Total following">{{totalFollowing}}</span>
+                </h3>
+                <ul class="nav-main-links" *ngIf="isLoggedIn">
+                  <li class="nav-main-link" *ngFor="let followingData of following; index as i">   
+                    <div class="nav-main-link-a">               
+                      <div class="link-flex">
+                        <div class="media">
+                          <a href="javascript:void(0)" class="follow-link" (click)="addCurrentStreamer(followingData.username)">
+                            <span class="live-user-img {{ followingData.isFollowingLive === true ?'live-active' : ' ' }}">
+                              <img src="{{followingData.imgUrl}}"  onError="this.src='assets/images/no-avatar.png'" alt="" draggable="false" />
+                              <span class="user-live {{ followingData.isFollowingLive === true ?'' : 'd-none' }}">LIVE</span>
+                            </span>
+                            <div class="media-body close">
+                              <span class="nav-link-text">{{ followingData.username | titlecase }}</span>
+                            </div>
+                          </a>
+                            <button 
+                              mat-icon-button
+                              (click)="deleteFollowing($event, followingData.followed_id)"
+                            >
+                          <mat-icon inline=true style="margin-bottom: 3px;">
+                          <svg height="10" width="10" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                          viewBox="0 0 115.76 111.41" style="enable-background:new 0 0 115.76 111.41;" xml:space="preserve">
+                          <style type="text/css">
+                          .st0{fill:#FF0000;}
+                          </style>
+                          <polygon class="st0" points="71.39,54.46 110.08,4.91 82.93,4.91 57.84,37.62 32.87,4.91 5.74,4.91 44.41,54.57 3.71,106.5 
+                          30.75,106.5 57.84,71.35 85.05,106.5 112.05,106.5 "/>
+                          </svg>
+                          </mat-icon>
+                            </button>
+                        </div>
+                      </div>
+                    </div>  
+                  </li>
+                  <button mat-icon-button class="more-dot" *ngIf="following?.length > 3">
+                    <mat-icon>
+                      <svg
+                        version="1.1"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="24px"
+                        height="24px"
+                        viewBox="0 0 990.9 990.9"
+                        style="enable-background: new 0 0 990.9 990.9"
+                        xml:space="preserve"
+                      >
+                        <g>
+                          <path
+                            d="M144.2,639.6c79.6,0,144.1-64.5,144.1-144.1c0-79.601-64.5-144.1-144.1-144.1C64.5,351.3,0,415.8,0,495.4
+      C0,575,64.5,639.6,144.2,639.6z M144.2,425.9c38.3,0,69.5,31.2,69.5,69.5c0,38.301-31.2,69.5-69.5,69.5
+      c-38.3,0-69.5-31.199-69.5-69.5C74.7,457.1,105.8,425.9,144.2,425.9z"
+                          />
+                          <path
+                            d="M351.4,495.4C351.4,575,415.9,639.5,495.5,639.5S639.6,575,639.6,495.4c0-79.6-64.5-144.1-144.1-144.1
+      S351.4,415.8,351.4,495.4z M565,495.4c0,38.301-31.2,69.5-69.5,69.5S426,533.701,426,495.4c0-38.3,31.2-69.5,69.5-69.5
+      S565,457.1,565,495.4z"
+                          />
+                          <path
+                            d="M846.8,351.3c-79.6,0-144.1,64.5-144.1,144.1C702.7,575,767.2,639.5,846.8,639.5C926.4,639.5,990.9,575,990.9,495.4
+      C991,415.8,926.5,351.3,846.8,351.3z M846.8,564.9c-38.3,0-69.5-31.199-69.5-69.5c0-38.3,31.2-69.5,69.5-69.5s69.5,31.2,69.5,69.5
+      C916.3,533.701,885.2,564.9,846.8,564.9z"
+                          />
+                        </g>
+                      </svg>
+                    </mat-icon>
+                  </button>
+                </ul>
+                <div *ngIf="!isLoggedIn">
+                  <span class="not-login-text">Log in to see Following</span>
+                </div>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="dialog-inner">
+  <div class="dialog-heder text-center">
+    <button class="btn-hide-absolute"></button>
+    <h1 class="heading-blue">Sign Up</h1>
+  </div>
+  <div class="dialog-content">  
+      <form autocomplete="off" name="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)" id="registerForm" novalidate>
+        <div class="form-row justify-content-left">
+          <div class="form-col form-col-12">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput formControlName="username" placeholder="Username" class="form-control" autocomplete="off" maxlength="15"/>      
+                <mat-error *ngIf="submitted && f.username.errors">
+                  <div *ngIf="f.username.errors.required">Username is required</div>
+                  <div *ngIf="f.username.errors.maxLength">Username cannot be longer than 20 characters</div>
+                  <div *ngIf="f.username.errors.pattern">Not a valid username</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row justify-content-left">
+          <div class="form-col form-col-12">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput type="password" formControlName="password" placeholder="Password" maxlength="30"/>
+                <mat-error *ngIf="submitted && f.password.errors">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
+                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>          
+        </div>
+        <div class="form-row justify-content-left">
+          <div class="form-col form-col-12">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput type="password" formControlName="confirm_password" placeholder="Confirm Password" maxlength="30"/>
+                <mat-error *ngIf="submitted && f.confirm_password.errors">
+                  <div *ngIf="f.confirm_password.errors.required">Confirm Password is required</div>
+                  <div *ngIf="f.confirm_password.errors.minlength">Password must be at least 6 characters</div>
+                  <div *ngIf="f.confirm_password.errors.mustMatch">Password does not match</div>
+                </mat-error>         
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row justify-content-left">
+          <div class="form-col form-col-6">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select formControlName="month" placeholder="Month">
+                  <mat-option *ngFor="let month of months" [value]="month">
+                    {{month}}
+                  </mat-option>
+                </mat-select>
+                <!-- <input matInput formControlName="month" placeholder="Month" maxlength="2"/>-->
+                <mat-error *ngIf="submitted && f.month.errors">
+                  <div *ngIf="f.month.errors.required">Month is required</div>
+                  <div *ngIf="f.month.errors.maxlength">2 disits only allow</div>
+                  <div *ngIf="f.month.errors.pattern">Invalid format</div>
+                </mat-error> 
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-col form-col-3">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <!-- <input matInput formControlName="day" placeholder="Day" maxlength="2"/> -->
+                <mat-select formControlName="day" placeholder="Day">
+                  <mat-option *ngFor="let day of days" [value]="day">
+                    <span class="mat-option-text">{{day}}</span>
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.day.errors">
+                  <div *ngIf="f.day.errors.required">Day is required</div>
+                  <div *ngIf="f.day.errors.maxlength">2 disits only allow</div>
+                  <div *ngIf="f.day.errors.pattern">Invalid format</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-col form-col-3">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <!-- <input matInput formControlName="year" placeholder="Year" maxlength="4"/> -->
+                <mat-select formControlName="year" placeholder="Year">
+                  <mat-option *ngFor="let year of years" [value]="year">
+                    <span class="mat-option-text">{{year}}</span>
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="submitted && f.year.errors">
+                  <div *ngIf="f.year.errors.required">Year is required</div>
+                  <div *ngIf="f.year.errors.minlength">Invalid Year</div>
+                  <div *ngIf="f.year.errors.maxlength">4 disits only allow</div>
+                  <div *ngIf="f.year.errors.pattern">Invalid format</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-row justify-content-left">
+          <div class="form-col form-col-12">
+            <div class="from-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput formControlName="email" placeholder="Email" maxlength="30"/>
+                <mat-error *ngIf="submitted && f.email.errors">
+                  <div *ngIf="f.email.errors.required">Email is required</div>
+                  <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-1 mb-1">
+          <button [disabled]="loader"
+            class="btn btn-mylive"
+            color="primary"
+            mat-raised-button
+          >
+            Register<i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+          </button>
+          &nbsp;&nbsp;
+          <button
+            class="btn btn-mylive"
+            color="bg-light"
+            mat-raised-button
+            mat-dialog-close
+          >
+          Cancel
+          </button>
+        </div>
+      </form>
+  </div>
+</div>
+
+<!-- mat-dialog-close -->

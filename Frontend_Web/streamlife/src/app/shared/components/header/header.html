@@ -1,0 +1,180 @@
+<header class="page-header">
+  <div class="container-fluid">
+    <div class="header-inner">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <div class="d-leftbar-trigger mr-2" >
+            <button id="followCarat" [disableRipple]="true" mat-icon-button (click)="clickLeftSidebar($event)">
+              <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#000"
+            >
+              <path
+                d="M12 16a1 1 0 0 1-.707-.293L5.636 10.05A1 1 0 0 1 7.05 8.636l4.95 4.95 4.95-4.95a1 1 0 0 1 1.414 1.414l-5.657 5.657A1 1 0 0 1 12 16z"
+              />
+            </svg>
+            </button>
+          </div>            
+          <a class="nav-logo mr-2"  href="#">
+            <img src="../../../assets/images/my-live-logo.png" draggable="false"  alt="" />
+          </a>  
+          <GoLive></GoLive>
+        </div>
+        <div class="nav-btns">          
+          <button
+            mat-raised-button
+            color="primary"
+            class="btn btn-mylive signup-btn"
+            (click)="openLoginDialog()"
+            *ngIf="!isLoggedIn"
+          >
+            Login
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            class="btn btn-mylive login-btn mr-1"
+            (click)="openSignUpDialog()"
+            *ngIf="!isLoggedIn"
+          >
+            Sign Up
+          </button>
+          <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="notificationMenu" class="notification-icon margin-right-20 headerIcons" matBadge="{{notificationCount}}">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 575 760" fill="#333" width="20px" height="20px" style="enable-background:new 0 0 611.999 611.999;" xml:space="preserve">
+                <g>
+                  <path d="M570.107,500.254c-65.037-29.371-67.511-155.441-67.559-158.622v-84.578c0-81.402-49.742-151.399-120.427-181.203
+                    C381.969,34,347.883,0,306.001,0c-41.883,0-75.968,34.002-76.121,75.849c-70.682,29.804-120.425,99.801-120.425,181.203v84.578
+                    c-0.046,3.181-2.522,129.251-67.561,158.622c-7.409,3.347-11.481,11.412-9.768,19.36c1.711,7.949,8.74,13.626,16.871,13.626
+                    h164.88c3.38,18.594,12.172,35.892,25.619,49.903c17.86,18.608,41.479,28.856,66.502,28.856
+                    c25.025,0,48.644-10.248,66.502-28.856c13.449-14.012,22.241-31.311,25.619-49.903h164.88c8.131,0,15.159-5.676,16.872-13.626
+                    C581.586,511.664,577.516,503.6,570.107,500.254z M484.434,439.859c6.837,20.728,16.518,41.544,30.246,58.866H97.32
+                    c13.726-17.32,23.407-38.135,30.244-58.866H484.434z M306.001,34.515c18.945,0,34.963,12.73,39.975,30.082
+                    c-12.912-2.678-26.282-4.09-39.975-4.09s-27.063,1.411-39.975,4.09C271.039,47.246,287.057,34.515,306.001,34.515z
+                    M143.97,341.736v-84.685c0-89.343,72.686-162.029,162.031-162.029s162.031,72.686,162.031,162.029v84.826
+                    c0.023,2.596,0.427,29.879,7.303,63.465H136.663C143.543,371.724,143.949,344.393,143.97,341.736z M306.001,577.485
+                    c-26.341,0-49.33-18.992-56.709-44.246h113.416C355.329,558.493,332.344,577.485,306.001,577.485z"/>
+                  <path d="M306.001,119.235c-74.25,0-134.657,60.405-134.657,134.654c0,9.531,7.727,17.258,17.258,17.258
+                      c9.531,0,17.258-7.727,17.258-17.258c0-55.217,44.923-100.139,100.142-100.139c9.531,0,17.258-7.727,17.258-17.258
+                      C323.259,126.96,315.532,119.235,306.001,119.235z"/>
+                </g>
+            </svg>
+          </button>
+          <mat-menu #notificationMenu="matMenu" class="notification-wrapper dropdown-header">
+              <ul class="dropdown-submenu" id="notificaton-menu">
+                <ng-container *ngIf="notificationData?.length > 0;else noNotificationTemplate">
+                  <li *ngFor="let notification of notificationData; index as i" >
+                      <div class="notifications-item" >
+                        <img class="user-circle-img" draggable="false" [src]="notification.imageUrl" alt="" />
+                        <div class="text">
+                            <h4>{{notification.username | titlecase}}</h4>
+                            <!-- <p>{{notification.username}} has been sent you ${{notification.amount}} {{notification.paymentFor}}.</p> -->
+                            <p>{{notification.message}}</p>
+                        </div>
+                      </div>
+                    </li> 
+                </ng-container>
+                <ng-template #noNotificationTemplate>
+                  <li>
+                    <div class="no-notifications">
+                      <div class="bell-icon">
+                        <mat-icon>
+                          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 575 760" fill="#333" width="20px" height="20px" style="enable-background:new 0 0 611.999 611.999;" xml:space="preserve">
+                              <g>
+                                <path d="M570.107,500.254c-65.037-29.371-67.511-155.441-67.559-158.622v-84.578c0-81.402-49.742-151.399-120.427-181.203
+                                  C381.969,34,347.883,0,306.001,0c-41.883,0-75.968,34.002-76.121,75.849c-70.682,29.804-120.425,99.801-120.425,181.203v84.578
+                                  c-0.046,3.181-2.522,129.251-67.561,158.622c-7.409,3.347-11.481,11.412-9.768,19.36c1.711,7.949,8.74,13.626,16.871,13.626
+                                  h164.88c3.38,18.594,12.172,35.892,25.619,49.903c17.86,18.608,41.479,28.856,66.502,28.856
+                                  c25.025,0,48.644-10.248,66.502-28.856c13.449-14.012,22.241-31.311,25.619-49.903h164.88c8.131,0,15.159-5.676,16.872-13.626
+                                  C581.586,511.664,577.516,503.6,570.107,500.254z M484.434,439.859c6.837,20.728,16.518,41.544,30.246,58.866H97.32
+                                  c13.726-17.32,23.407-38.135,30.244-58.866H484.434z M306.001,34.515c18.945,0,34.963,12.73,39.975,30.082
+                                  c-12.912-2.678-26.282-4.09-39.975-4.09s-27.063,1.411-39.975,4.09C271.039,47.246,287.057,34.515,306.001,34.515z
+                                  M143.97,341.736v-84.685c0-89.343,72.686-162.029,162.031-162.029s162.031,72.686,162.031,162.029v84.826
+                                  c0.023,2.596,0.427,29.879,7.303,63.465H136.663C143.543,371.724,143.949,344.393,143.97,341.736z M306.001,577.485
+                                  c-26.341,0-49.33-18.992-56.709-44.246h113.416C355.329,558.493,332.344,577.485,306.001,577.485z"/>
+                                <path d="M306.001,119.235c-74.25,0-134.657,60.405-134.657,134.654c0,9.531,7.727,17.258,17.258,17.258
+                                    c9.531,0,17.258-7.727,17.258-17.258c0-55.217,44.923-100.139,100.142-100.139c9.531,0,17.258-7.727,17.258-17.258
+                                    C323.259,126.96,315.532,119.235,306.001,119.235z"/>
+                              </g>
+                          </svg>
+                        </mat-icon>
+                      </div>
+                      <div class="text">No Notfications available</div>
+                    </div>
+                  </li>
+                </ng-template>              
+              </ul>
+              <button *ngIf="notificationData?.length > 0" color="primary" class="primary-app-btn" (click)="deleteNotifications()">
+                Delete All
+              </button>
+          </mat-menu>
+          <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" class="logout-btn">
+            <img draggable="false" class="user-circle-img headerIcons {{no_img_class}}" onError="this.src='assets/images/no-avatar.png'" [src]="uploadImage || profileImgUrl" alt="" /> 
+          </button>         
+            <div>
+              <button mat-icon-button [disableRipple]="true" id="streamChatCarat" (click)="clickStreamChatToggle($event)">
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#000"
+                >
+                  <path
+                    d="M12 16a1 1 0 0 1-.707-.293L5.636 10.05A1 1 0 0 1 7.05 8.636l4.95 4.95 4.95-4.95a1 1 0 0 1 1.414 1.414l-5.657 5.657A1 1 0 0 1 12 16z"
+                  />
+                </svg>
+              </button>
+            </div>
+          <mat-menu #menu="matMenu" class="right-menu dropdown-header">
+              <div class="profile_dropdown" disabled>
+                <img class="user-circle-img {{no_img_class}}" draggable="false"  onError="this.src='assets/images/no-avatar.png'" [src]="uploadImage || profileImgUrl" alt="" /> 
+                <div class="user-text">
+                  <p>{{username}}</p>
+                  <span>{{email}}</span>
+                </div>
+              </div>
+              <ul class="dropdown-submenu">
+                <li id="cash-out">
+                  <span mat-menu-item>Cash Out&nbsp;<strong>(${{walletAmount}})</strong>&nbsp;&nbsp;&nbsp;&nbsp;<svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                    <g clip-path="url(#clip0_1_266)">
+                      <path d="M17.7297 6.5581C17.6178 6.21191 17.3107 5.96603 16.9474 5.93329L12.0128 5.48522L10.0616 0.918075C9.91769 0.583362 9.59003 0.366699 9.22596 0.366699C8.8619 0.366699 8.53423 0.583362 8.39036 0.918858L6.43908 5.48522L1.5037 5.93329C1.14108 5.96681 0.8348 6.21191 0.722229 6.5581C0.609659 6.90429 0.71362 7.28401 0.987939 7.52337L4.71791 10.7946L3.61803 15.6396C3.53755 15.9958 3.67581 16.364 3.97139 16.5777C4.13027 16.6925 4.31615 16.7509 4.50359 16.7509C4.66521 16.7509 4.82552 16.7074 4.9694 16.6213L9.22596 14.0773L13.481 16.6213C13.7923 16.8086 14.1848 16.7915 14.4798 16.5777C14.7755 16.3634 14.9136 15.995 14.8331 15.6396L13.7332 10.7946L17.4632 7.52402C17.7375 7.28401 17.8423 6.90494 17.7297 6.5581Z"
+                        fill="#FFC107" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_1_266">
+                        <rect width="17.0968" height="17.0968" fill="white" transform="translate(0.677368)" />
+                      </clipPath>
+                    </defs>
+                  </svg>Tips&nbsp;<strong>({{totalTipsCount}})</strong></span>
+                </li>
+              </ul>              
+              <hr/>
+              <div class="h-m-scroll">
+                <perfect-scrollbar>
+                  <div class="other-menu">                    
+                    <button mat-menu-item (click)="avaterBrowse.click()">
+                      <input type="file" class="d-none" hidden  (change)="onSelectFile($event)" #avaterBrowse />
+                      Change Profile Picture
+                    </button>
+                    <button mat-menu-item 
+                    (click)="openChangePasswordDialog()"> Change Password </button>
+                    <button mat-menu-item 
+                      (click)="openChangeBankInformationDialog()">Payout Settings</button>
+                    <button mat-menu-item class="btn btn-mylive " (click)="doLogout()">
+                      Logout
+                    </button>
+                  </div>
+                </perfect-scrollbar>
+              </div>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+

@@ -1,0 +1,108 @@
+<div class="dialog-inner">
+  <div class="dialog-heder">
+    <button class="btn-hide-absolute"></button>
+    <button mat-icon-button mat-dialog-close class="dialog-close">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 10 10"
+      >
+        <path
+          fill="#414244"
+          d="M.262 9.737c.175.175.401.263.635.263.233 0 .459-.088.634-.263L5 6.263l3.47 3.474c.174.175.4.263.633.263.234 0 .46-.088.635-.263.35-.35.35-.912 0-1.263L6.254 5l3.469-3.474c.35-.35.35-.913 0-1.263-.35-.35-.911-.35-1.26 0l-3.47 3.474L1.523.263c-.35-.35-.91-.35-1.26 0s-.35.912 0 1.263L3.731 5 .262 8.474c-.35.35-.35.913 0 1.263z"
+          opacity=".5"
+        />
+      </svg>
+    </button>
+    <h2>Shop</h2>
+  </div>
+  <form autocomplete="off">
+    <div class="dialog-content">
+      <div class="container">
+        <div class="container-box">
+          <div class="shop-content ">
+            <perfect-scrollbar class="{{data.payment_for}}">
+              <div class="shop-user-info">
+                <p class="have-text">You have now:</p>
+                <div class="shop-point {{data.payment_for == 'tips'? ' ':'gift-icon'}}">
+                  <img style="width: 30px;" draggable="false"  src="../../../assets/images/{{data.payment_for == 'tips'? '../../../assets/images/tips.1':'../../../assets/images/subs.1'}}.svg" alt="" />
+                  <h3>{{items}}</h3>
+                </div>
+              </div>
+              <div class="shop-amount-list-wrap">
+                <div *ngIf="data.payment_for == 'tips'">
+                  <div *ngFor="let product of products" class="shop-amount-list">
+                    <div class="numarick">
+                      <img style="width: 30px;" draggable="false" src="../../../assets/images/tips.{{product.quantity}}.svg" alt="" />
+                      <span class="crose">✕</span>
+                      <span class="amount">{{product.quantity}}</span>
+                      <span>=</span>
+                    </div>
+                    <button mat-flat-button class="money-btn" (click)="addAmount(product.quantity, data.payment_for, product.price)">
+                      ${{product.amount}}
+                    </button>
+                  </div>
+                </div>
+                <div *ngIf="data.payment_for == 'subs'">
+                  <div *ngFor="let product of products" class="shop-amount-list">
+                    <div class="numarick">
+                      <img style="width: 30px;" src="../../../assets/images/subs.{{product.quantity}}.svg" alt="" draggable="false" />
+                      <span class="crose">✕</span>
+                      <span class="amount">{{product.quantity}}</span>
+                      <span>=</span>
+                    </div>
+                    <button mat-flat-button class="money-btn" (click)="addAmount(product.quantity, data.payment_for, '')">
+                      ${{product.amount}}
+                    </button>
+                  </div>
+                </div>
+                <div class="shop-amount-list">
+                  <div class="numarick {{data.payment_for == 'tips'? ' ':'small-gift-icon'}}">
+                    <!--<img style="width: 30px;" src="../../../assets/images/{{data.payment_for == 'tips'? '../../../assets/images/tips.1':'../../../assets/images/subs.1'}}.svg" alt="" />-->
+                    <span style="font-size: 14px; width:60px;">Custom Amount</span>
+                    <span class="crose">✕</span>
+                    <span class="amount">
+                      <input
+                        NumbersOnly
+                        type="text" 
+                        pattern="\d*" 
+                        maxlength="4" 
+                        class="form-control product_quantity" 
+                        (keyup)="onKeypressEvent($event)" 
+                        (keypress)="onKeypressEvent($event)" 
+                        (change)="onKeypressEvent($event)" 
+                    />
+                    </span>
+                    <span>=</span>
+                  </div>
+                  <button mat-flat-button class="money-btn" (click)="addAmount(subscription_value, data.payment_for, '')">
+                    ${{subscription_amount}}
+                  </button>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-footer">
+      <div class="pay-options">
+         <button
+          mat-button
+          class="card-info"
+        >
+        </button> 
+        <button
+          class="pay-outline-btn"
+          mat-stroked-button
+          mat-dialog-close
+          (click)="OpenShopPaymentDialog()"
+          [disabled]="isDisabled"
+        >
+          Pay <span class="payble-amount" *ngIf="!isHidden">${{pay_amount}}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

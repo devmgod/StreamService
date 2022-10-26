@@ -1,0 +1,119 @@
+<div class="dialog-inner">
+  <div class="dialog-heder text-center">
+    <button class="btn-hide-absolute"></button>
+    <h2 class="heading-blue">Cash Out</h2>
+  </div>
+  <div class="dialog-content">
+    <form autocomplete="off" name="myWalletForm" [formGroup]="myWalletForm" (ngSubmit)="onSubmit(myWalletForm.value)" id="myWalletForm" novalidate>
+      <div class="form-row">
+        <div class="form-col form-col-4">
+          <div class="from-group">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput type="number" formControlName="amount" placeholder="Amount" class="form-control" autocomplete="off"/>      
+              <mat-error *ngIf="submitted && f.amount.errors">
+                <div *ngIf="f.amount.errors.required">Amount is required</div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-col form-col-4">
+          <div class="from-group">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select formControlName="currency" placeholder="Currency">
+                <!-- <mat-option *ngFor="let month of months" [value]="month">
+                  {{month}}
+                </mat-option> -->
+                <mat-option value="usd" selected>
+                  USD
+                </mat-option>
+                <mat-option value="eur">
+                  EUR
+                </mat-option>
+                <mat-option value="inr">
+                  INR
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f.currency.errors">
+                <div *ngIf="f.currency.errors.required">Currency is required</div>
+              </mat-error> 
+            </mat-form-field>
+          </div>
+        </div>    
+        <div class="form-col form-col-4">
+          <div class="from-group">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select formControlName="country" placeholder="Country">
+                <!-- <mat-option *ngFor="let month of months" [value]="month">
+                  {{month}}
+                </mat-option> -->
+                <mat-option value="us" selected>
+                  USA
+                </mat-option>
+                <mat-option value="ind">
+                  IND
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitted && f.country.errors">
+                <div *ngIf="f.country.errors.required">Country is required</div>
+              </mat-error> 
+            </mat-form-field>
+          </div>
+        </div>              
+      </div>
+      
+      <!--<div class="form-row">
+        <div class="form-col form-col-4">
+          <div class="from-group">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput formControlName="account_holder_name" placeholder="Account Holder Name" class="form-control" autocomplete="off"/>      
+              <mat-error *ngIf="submitted && f.account_holder_name.errors">
+                <div *ngIf="f.account_holder_name.errors.required">Name is required</div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>    
+        <div class="form-col form-col-4">
+          <div class="from-group">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput formControlName="routing_number" placeholder="Routing Number" class="form-control"  autocomplete="off"/>      
+              <mat-error *ngIf="submitted && f.routing_number.errors">
+                <div *ngIf="f.routing_number.errors.required">Routing Number is required</div>
+                <div *ngIf="f.routing_number.errors.pattern">Enter only number.</div>
+              </mat-error>
+            </mat-form-field>
+          </div> 
+        </div>   
+        <div class="form-col form-col-4">
+          <div class="from-group">
+            <mat-form-field appearance="outline" class="w-100">
+              <input matInput formControlName="account_number" placeholder="Account Number" class="form-control" autocomplete="off"/>      
+              <mat-error *ngIf="submitted && f.account_number.errors">
+                <div *ngIf="f.account_number.errors.required">Account Number is required</div>
+                <div *ngIf="f.account_number.errors.pattern">Enter only number.</div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>-->
+
+      <div class="text-center mt-1 mb-1">
+        <button [disabled]="loader"
+          class="btn btn-mylive"
+          color="primary"
+          mat-raised-button
+        >
+          Pay <i class="fa fa-spinner fa-spin" *ngIf="loader"></i>
+        </button>
+        &nbsp;&nbsp;
+        <button
+            class="btn btn-mylive"
+            color="bg-light"
+            mat-raised-button
+            mat-dialog-close
+          >
+        Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

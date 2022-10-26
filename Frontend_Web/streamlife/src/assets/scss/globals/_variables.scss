@@ -1,0 +1,88 @@
+
+$breakpoints: (
+  xs   : 320,
+  sm   : 576px,
+  md   : 768px,
+  lg   : 992px,
+  xl   : 1200px,
+  xxl  : 1400px,
+  xxxl : 1601px
+);
+
+$sides: (top:0px, right:0px, bottom:0px, left:0px);
+$toCheckCssProperty: (margin:null,padding:null);
+
+/*********** table images ***************/
+
+$url_sortarrow: url(../images/newimages/sort-arrow.svg);
+$url_sortarrow-asc: url(../images/newimages/sort-arrow-ascending.svg);
+$url_sortarrow-desc: url(../images/newimages/sort-arrow-descending.svg);
+
+/*********** circle-btn-width ************/
+
+$circle-64: (
+  null	: (64px,64px)
+);
+
+/*... auszug slider .....*/
+
+$auszug-big-slider: (
+  xl   	: (320px,320px, 7%, -70px),
+  xxl   : (380px,380px, 7%, -100px),
+  xxxl  : (480px, 480px, 7%, -130px),
+);
+$auszug-big-slider-bottom-2: (
+  xl   	: (320px,320px, 13%, 160px),
+  xxl   : (380px,380px, 13%, 190px),
+  xxxl  : (480px, 480px, 13%, 245px),
+);
+$auszug-big-slider-bottom-3: (
+  xl   	: (320px,320px, 35%, -70px),
+  xxl   : (380px,380px, 35%, -100px),
+  xxxl  : (480px, 480px, 35%, -130px),
+);
+$auszug-big-slider-bottom-4: (
+  xl   	: (320px,320px, 55%, -185px),
+  xxl   : (380px,380px, 55%, -215px),
+  xxxl  : (480px, 480px, 55%, -215px)
+);
+
+$auszug-mid-slider-bottom-5: (
+   xl   : (270px,270px, 31%, 155px, 'right'),	
+  xxl   : (330px,330px, 31%, 185px, 'right'),
+  xxxl  : (386px, 386px, 31%, 185px, 'right')
+);
+
+
+$auszug-mid-slider: (
+   xl   : (138px, 138px, -10px, 200px),		
+  xxl   : (198px, 198px, -20px, 230px),
+  xxxl  : (268px, 268px, -40px, 230px)
+);
+
+$auszug-mid-slider-6: (
+  xl    : (138px, 138px, 23%, 200px, 'right'),
+  xxl   : (198px, 198px, 21%, 230px, 'right'),
+  xxxl  : (268px, 268px, 21%, 230px, 'right')
+);
+
+$auszug-mid-slider-7: (
+   xl   : (138px, 138px, -70px, -10px, 'right'),
+  xxl   : (198px, 198px, -100px, -40px, 'right'),
+  xxxl  : (268px, 268px, -100px, -40px, 'right')
+);
+
+$auszug-mid-slider-bottom-8: (
+   xl   : (270px, 270px, -80px, 155px, 'right'),
+  xxl   : (330px, 330px, -110px, 185px, 'right'),
+  xxxl  : (386px, 386px, -110px, 185px, 'right')
+);
+
+/*********** privacy policy ************/
+
+$greenCircle : url(../images/green-outline-circel.svg);
+$pinkCircle  : url(../images/pink-outline-circel.svg);
+
+/************ unsere-section ****************/
+
+$toltal-li-count: 6;
